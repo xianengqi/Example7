@@ -13,6 +13,7 @@
 		C3BAAA0129C49B380003A290 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3BAAA0029C49B380003A290 /* Preview Assets.xcassets */; };
 		C3BAAA0329C49B380003A290 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BAAA0229C49B380003A290 /* Persistence.swift */; };
 		C3BAAA0629C49B380003A290 /* Example7.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3BAAA0429C49B380003A290 /* Example7.xcdatamodeld */; };
+		C3BAAA0D29C4AA340003A290 /* Example1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BAAA0C29C4AA340003A290 /* Example1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		C3BAAA0029C49B380003A290 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C3BAAA0229C49B380003A290 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C3BAAA0529C49B380003A290 /* Example7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Example7.xcdatamodel; sourceTree = "<group>"; };
+		C3BAAA0C29C4AA340003A290 /* Example1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			children = (
 				C3BAA9F929C49B370003A290 /* Example7App.swift */,
 				C3BAA9FB29C49B370003A290 /* ContentView.swift */,
+				C3BAAA0C29C4AA340003A290 /* Example1.swift */,
 				C3BAA9FD29C49B380003A290 /* Assets.xcassets */,
 				C3BAAA0229C49B380003A290 /* Persistence.swift */,
 				C3BAAA0429C49B380003A290 /* Example7.xcdatamodeld */,
@@ -146,6 +149,7 @@
 				C3BAAA0629C49B380003A290 /* Example7.xcdatamodeld in Sources */,
 				C3BAAA0329C49B380003A290 /* Persistence.swift in Sources */,
 				C3BAA9FC29C49B370003A290 /* ContentView.swift in Sources */,
+				C3BAAA0D29C4AA340003A290 /* Example1.swift in Sources */,
 				C3BAA9FA29C49B370003A290 /* Example7App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
