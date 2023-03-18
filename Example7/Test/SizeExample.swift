@@ -109,7 +109,7 @@ struct SizeExample: View {
   
   private func deleteColor(at index: Int) {
     if let sizeToDelete = colors[index].sizeArray!.first {
-      let color = colors.first(where: { $0.sizeArray!.contains(sizeToDelete) == true })!
+      let color = colors.first(where: { $0.sizeArray?.contains(sizeToDelete) == true })!
       viewContext.delete(color)
       do {
         try viewContext.save()
@@ -194,7 +194,7 @@ struct SizeExample: View {
         
           //         长按弹出提示删除框
           .onLongPressGesture {
-            if let color = colors.first(where: { $0.sizeArray!.contains(size) == true }) {
+            if let color = colors.first(where: { $0.sizeArray?.contains(size) == true }) {
               deleteIndex = colors.firstIndex(of: color)
               deleteAlert = true
             }

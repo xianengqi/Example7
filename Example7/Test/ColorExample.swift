@@ -45,8 +45,6 @@ struct ColorExample: View {
   private var colorsFetchRequest: FetchedResults<SkuEntity>
   
   private func submit() {
-
-    
     // 添加进来
     let newColor = SkuEntity(context: viewContext)
     newColor.colorArray = [name]
@@ -215,10 +213,10 @@ struct ColorExample: View {
 //              deleteIndex = colors.firstIndex(of: color)
 //              deleteAlert = true
 //            }
-            if let index = colors.firstIndex(where: { $0.colorArray!.contains(size) }) {
-                deleteIndex = index
-                deleteAlert = true
-              }
+            if let index = colors.firstIndex(where: { $0.colorArray?.contains(size) == true }) {
+              deleteIndex = index
+              deleteAlert = true
+            }
           }
             
           .alert(isPresented: $deleteAlert) {
