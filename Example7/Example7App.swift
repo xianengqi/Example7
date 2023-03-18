@@ -13,7 +13,7 @@ struct Example7App: App {
 
     var body: some Scene {
         WindowGroup {
-          Example1()
+          Example2()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

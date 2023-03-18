@@ -14,6 +14,12 @@
 		C3BAAA0329C49B380003A290 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BAAA0229C49B380003A290 /* Persistence.swift */; };
 		C3BAAA0629C49B380003A290 /* Example7.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3BAAA0429C49B380003A290 /* Example7.xcdatamodeld */; };
 		C3BAAA0D29C4AA340003A290 /* Example1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BAAA0C29C4AA340003A290 /* Example1.swift */; };
+		C3D2D1EE29C5A1C2003C826A /* SpuEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1EA29C5A1C2003C826A /* SpuEntity+CoreDataClass.swift */; };
+		C3D2D1EF29C5A1C2003C826A /* SpuEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1EB29C5A1C2003C826A /* SpuEntity+CoreDataProperties.swift */; };
+		C3D2D1F029C5A1C2003C826A /* SkuEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1EC29C5A1C2003C826A /* SkuEntity+CoreDataClass.swift */; };
+		C3D2D1F129C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1ED29C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift */; };
+		C3D2D1F329C5A24B003C826A /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1F229C5A24B003C826A /* Example2.swift */; };
+		C3D2D1F529C5A55E003C826A /* SkuEntityObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1F429C5A55E003C826A /* SkuEntityObservable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +31,12 @@
 		C3BAAA0229C49B380003A290 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C3BAAA0529C49B380003A290 /* Example7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Example7.xcdatamodel; sourceTree = "<group>"; };
 		C3BAAA0C29C4AA340003A290 /* Example1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1.swift; sourceTree = "<group>"; };
+		C3D2D1EA29C5A1C2003C826A /* SpuEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpuEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		C3D2D1EB29C5A1C2003C826A /* SpuEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpuEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		C3D2D1EC29C5A1C2003C826A /* SkuEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkuEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		C3D2D1ED29C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkuEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		C3D2D1F229C5A24B003C826A /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
+		C3D2D1F429C5A55E003C826A /* SkuEntityObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkuEntityObservable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +69,15 @@
 		C3BAA9F829C49B370003A290 /* Example7 */ = {
 			isa = PBXGroup;
 			children = (
+				C3D2D1EA29C5A1C2003C826A /* SpuEntity+CoreDataClass.swift */,
+				C3D2D1EB29C5A1C2003C826A /* SpuEntity+CoreDataProperties.swift */,
+				C3D2D1EC29C5A1C2003C826A /* SkuEntity+CoreDataClass.swift */,
+				C3D2D1ED29C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift */,
+				C3D2D1F429C5A55E003C826A /* SkuEntityObservable.swift */,
 				C3BAA9F929C49B370003A290 /* Example7App.swift */,
 				C3BAA9FB29C49B370003A290 /* ContentView.swift */,
 				C3BAAA0C29C4AA340003A290 /* Example1.swift */,
+				C3D2D1F229C5A24B003C826A /* Example2.swift */,
 				C3BAA9FD29C49B380003A290 /* Assets.xcassets */,
 				C3BAAA0229C49B380003A290 /* Persistence.swift */,
 				C3BAAA0429C49B380003A290 /* Example7.xcdatamodeld */,
@@ -146,9 +164,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D2D1F529C5A55E003C826A /* SkuEntityObservable.swift in Sources */,
 				C3BAAA0629C49B380003A290 /* Example7.xcdatamodeld in Sources */,
 				C3BAAA0329C49B380003A290 /* Persistence.swift in Sources */,
 				C3BAA9FC29C49B370003A290 /* ContentView.swift in Sources */,
+				C3D2D1F329C5A24B003C826A /* Example2.swift in Sources */,
+				C3D2D1EF29C5A1C2003C826A /* SpuEntity+CoreDataProperties.swift in Sources */,
+				C3D2D1F029C5A1C2003C826A /* SkuEntity+CoreDataClass.swift in Sources */,
+				C3D2D1EE29C5A1C2003C826A /* SpuEntity+CoreDataClass.swift in Sources */,
+				C3D2D1F129C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift in Sources */,
 				C3BAAA0D29C4AA340003A290 /* Example1.swift in Sources */,
 				C3BAA9FA29C49B370003A290 /* Example7App.swift in Sources */,
 			);
