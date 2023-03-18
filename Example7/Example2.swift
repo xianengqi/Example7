@@ -93,23 +93,13 @@ struct ProductDetailView: View {
     }
     .navigationBarTitle(Text(spu.name), displayMode: .inline)
   }
-
-  func deleteProduct() {
-    managedObjectContext.delete(spu)
-    do {
-      try managedObjectContext.save()
-      presentationMode.wrappedValue.dismiss()
-    } catch {
-      print("Error deleting product: \(error)")
-    }
-  }
 }
 
 // 库存详情页面
 struct StockDetailsView: View {
   @ObservedObject var spu: SpuEntity
 
-  @State private var selectedColor: String
+  @State private var selectedColor: String?
   @State private var selectedSku: SkuEntity?
 
   @Environment(\.managedObjectContext) private var managedObjectContext
@@ -118,7 +108,7 @@ struct StockDetailsView: View {
 
   init(spu: SpuEntity) {
     self.spu = spu
-    self._selectedColor = State(initialValue: Array(Set(spu.skus.map { $0.color })).sorted().first!)
+    self._selectedColor = State(initialValue: Array(Set(spu.skus.map { $0.color })).sorted().first)
     self._selectedSku = State(initialValue: spu.skus.filter { $0.color == self.selectedColor }.first)
   }
 
@@ -141,7 +131,7 @@ struct StockDetailsView: View {
         }
       }
       .padding(.bottom)
-      if !selectedColor.isEmpty {
+      if let selectedColor = selectedColor, !selectedColor.isEmpty {
         Text("库存详情 (\(selectedColor))")
           .font(.headline)
           .padding(.top)
@@ -186,64 +176,9 @@ struct StockDetailsView: View {
 }
 
 // 添加商品页面
-struct AddProductView: View {
-  @Environment(\.presentationMode) var presentationMode
-  @Environment(\.managedObjectContext) private var managedObjectContext
+import SwiftUI
 
-  @State private var productName = ""
-  @State private var productPrice = ""
-  @State private var colors = ""
-  @State private var sizes = ""
 
-  var body: some View {
-    Form {
-      Section(header: Text("基本信息")) {
-        TextField("商品名称", text: $productName)
-        TextField("商品价格", text: $productPrice)
-      }
-
-      Section(header: Text("颜色和尺码")) {
-        TextField("颜色（用逗号分隔）", text: $colors)
-        TextField("尺码（用逗号分隔）", text: $sizes)
-      }
-
-      Button(action: {
-        saveNewProduct()
-      }) {
-        Text("添加商品")
-      }
-    }
-    .navigationBarTitle("添加商品", displayMode: .inline)
-  }
-
-  func saveNewProduct() {
-    let colorList = colors.split(separator: ",").map { String($0.trimmingCharacters(in: .whitespaces)) }
-    let sizeList = sizes.split(separator: ",").map { String($0.trimmingCharacters(in: .whitespaces)) }
-
-    let newSpu = SpuEntity(context: managedObjectContext)
-    newSpu.id = UUID()
-    newSpu.name = productName
-    newSpu.price = Double(productPrice) ?? 0
-
-    for color in colorList {
-      for size in sizeList {
-        let newSku = SkuEntity(context: managedObjectContext)
-        newSku.id = UUID()
-        newSku.color = color
-        newSku.size = size
-        newSku.stock = 0
-        newSku.spu = newSpu
-      }
-    }
-
-    do {
-      try managedObjectContext.save()
-      presentationMode.wrappedValue.dismiss()
-    } catch {
-      print("Error saving new product: \(error)")
-    }
-  }
-}
 
 struct Example2: View {
   var body: some View {

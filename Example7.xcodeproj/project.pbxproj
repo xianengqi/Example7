@@ -20,6 +20,10 @@
 		C3D2D1F129C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1ED29C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift */; };
 		C3D2D1F329C5A24B003C826A /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1F229C5A24B003C826A /* Example2.swift */; };
 		C3D2D1F529C5A55E003C826A /* SkuEntityObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1F429C5A55E003C826A /* SkuEntityObservable.swift */; };
+		C3D2D1FA29C5B78E003C826A /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = C3D2D1F929C5B78E003C826A /* Flow */; };
+		C3D2D1FE29C5B924003C826A /* ColorExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1FC29C5B924003C826A /* ColorExample.swift */; };
+		C3D2D1FF29C5B924003C826A /* SizeExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D1FD29C5B924003C826A /* SizeExample.swift */; };
+		C3D2D20129C5BC43003C826A /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D20029C5BC43003C826A /* AddProductView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,9 @@
 		C3D2D1ED29C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkuEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		C3D2D1F229C5A24B003C826A /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
 		C3D2D1F429C5A55E003C826A /* SkuEntityObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkuEntityObservable.swift; sourceTree = "<group>"; };
+		C3D2D1FC29C5B924003C826A /* ColorExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExample.swift; sourceTree = "<group>"; };
+		C3D2D1FD29C5B924003C826A /* SizeExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeExample.swift; sourceTree = "<group>"; };
+		C3D2D20029C5BC43003C826A /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D2D1FA29C5B78E003C826A /* Flow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,10 +82,12 @@
 				C3D2D1EC29C5A1C2003C826A /* SkuEntity+CoreDataClass.swift */,
 				C3D2D1ED29C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift */,
 				C3D2D1F429C5A55E003C826A /* SkuEntityObservable.swift */,
+				C3D2D1FB29C5B916003C826A /* Test */,
 				C3BAA9F929C49B370003A290 /* Example7App.swift */,
 				C3BAA9FB29C49B370003A290 /* ContentView.swift */,
 				C3BAAA0C29C4AA340003A290 /* Example1.swift */,
 				C3D2D1F229C5A24B003C826A /* Example2.swift */,
+				C3D2D20029C5BC43003C826A /* AddProductView.swift */,
 				C3BAA9FD29C49B380003A290 /* Assets.xcassets */,
 				C3BAAA0229C49B380003A290 /* Persistence.swift */,
 				C3BAAA0429C49B380003A290 /* Example7.xcdatamodeld */,
@@ -92,6 +102,15 @@
 				C3BAAA0029C49B380003A290 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C3D2D1FB29C5B916003C826A /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				C3D2D1FC29C5B924003C826A /* ColorExample.swift */,
+				C3D2D1FD29C5B924003C826A /* SizeExample.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,6 +129,9 @@
 			dependencies = (
 			);
 			name = Example7;
+			packageProductDependencies = (
+				C3D2D1F929C5B78E003C826A /* Flow */,
+			);
 			productName = Example7;
 			productReference = C3BAA9F629C49B370003A290 /* Example7.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +160,9 @@
 				Base,
 			);
 			mainGroup = C3BAA9ED29C49B370003A290;
+			packageReferences = (
+				C3D2D1F829C5B78E003C826A /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
+			);
 			productRefGroup = C3BAA9F729C49B370003A290 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,12 +191,15 @@
 			files = (
 				C3D2D1F529C5A55E003C826A /* SkuEntityObservable.swift in Sources */,
 				C3BAAA0629C49B380003A290 /* Example7.xcdatamodeld in Sources */,
+				C3D2D20129C5BC43003C826A /* AddProductView.swift in Sources */,
 				C3BAAA0329C49B380003A290 /* Persistence.swift in Sources */,
 				C3BAA9FC29C49B370003A290 /* ContentView.swift in Sources */,
+				C3D2D1FE29C5B924003C826A /* ColorExample.swift in Sources */,
 				C3D2D1F329C5A24B003C826A /* Example2.swift in Sources */,
 				C3D2D1EF29C5A1C2003C826A /* SpuEntity+CoreDataProperties.swift in Sources */,
 				C3D2D1F029C5A1C2003C826A /* SkuEntity+CoreDataClass.swift in Sources */,
 				C3D2D1EE29C5A1C2003C826A /* SpuEntity+CoreDataClass.swift in Sources */,
+				C3D2D1FF29C5B924003C826A /* SizeExample.swift in Sources */,
 				C3D2D1F129C5A1C2003C826A /* SkuEntity+CoreDataProperties.swift in Sources */,
 				C3BAAA0D29C4AA340003A290 /* Example1.swift in Sources */,
 				C3BAA9FA29C49B370003A290 /* Example7App.swift in Sources */,
@@ -375,6 +403,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C3D2D1F829C5B78E003C826A /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tevelee/SwiftUI-Flow.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C3D2D1F929C5B78E003C826A /* Flow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3D2D1F829C5B78E003C826A /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
+			productName = Flow;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C3BAAA0429C49B380003A290 /* Example7.xcdatamodeld */ = {

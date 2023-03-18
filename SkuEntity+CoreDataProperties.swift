@@ -19,14 +19,18 @@ public extension SkuEntity {
   @NSManaged var size: String
   @NSManaged var stock: Int16
   @NSManaged var sortIndex: Int16 // 添加 sortIndex 属性
+  
+  @NSManaged var colorArray: [String]?
+  @NSManaged var sizeArray: [String]?
 
   @NSManaged var spu: SpuEntity
+  
+  func removeFromColorArray(_ size: String) {
+    if let index = colorArray!.firstIndex(of: size) {
+      colorArray!.remove(at: index)
+    }
+  }
 
-//  override func awakeFromInsert() {
-//    super.awakeFromInsert()
-//    id = UUID()
-//    sortIndex = Int16(Date().timeIntervalSince1970) // 为 sortIndex 赋值
-//  }
 }
 
 extension SkuEntity: Identifiable {}
