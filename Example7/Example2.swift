@@ -14,15 +14,26 @@ struct ProductListView: View {
   @Environment(\.managedObjectContext) private var managedObjectContext
   @FetchRequest(entity: SpuEntity.entity(), sortDescriptors: []) private var products: FetchedResults<SpuEntity>
 
+  @State private var showDeleteAlert = false
+  @State private var deletingProduct: SpuEntity? // the product to be deleted
+
   var body: some View {
     NavigationView {
-      List(products) { product in
-        NavigationLink(destination: ProductDetailView(spu: product)) {
-          VStack(alignment: .leading) {
-            Text(product.name)
-              .font(.headline)
-            Text("价格: \(product.price, specifier: "%.2f")")
-              .font(.subheadline)
+      List {
+        ForEach(products) { product in
+          NavigationLink(destination: ProductDetailView(spu: product)) {
+            VStack(alignment: .leading) {
+              Text(product.name)
+                .font(.headline)
+              Text("价格: \(product.price, specifier: "%.2f")")
+                .font(.subheadline)
+            }
+          }
+        }
+        .onDelete { indexSet in
+          if let index = indexSet.first {
+            deletingProduct = products[index]
+            showDeleteAlert = true
           }
         }
       }
@@ -32,13 +43,38 @@ struct ProductListView: View {
           Image(systemName: "plus")
         }
       )
+      .alert(isPresented: $showDeleteAlert) {
+        Alert(
+          title: Text("确认删除商品？"),
+          message: Text("删除后无法恢复！"),
+          primaryButton: .destructive(Text("删除"), action: deleteProduct),
+          secondaryButton: .cancel()
+        )
+      }
     }
+  }
+
+  func deleteProduct() {
+    if let product = deletingProduct {
+      managedObjectContext.delete(product)
+      do {
+        try managedObjectContext.save()
+      } catch {
+        print("Error deleting product: \(error)")
+      }
+    }
+    deletingProduct = nil
   }
 }
 
 // ProductDetailView.swift
 struct ProductDetailView: View {
   @ObservedObject var spu: SpuEntity
+
+  @Environment(\.managedObjectContext) private var managedObjectContext
+  @Environment(\.presentationMode) var presentationMode
+
+  @State private var showingDeleteAlert = false
 
   var body: some View {
     VStack {
@@ -56,6 +92,16 @@ struct ProductDetailView: View {
       .listStyle(InsetGroupedListStyle())
     }
     .navigationBarTitle(Text(spu.name), displayMode: .inline)
+  }
+
+  func deleteProduct() {
+    managedObjectContext.delete(spu)
+    do {
+      try managedObjectContext.save()
+      presentationMode.wrappedValue.dismiss()
+    } catch {
+      print("Error deleting product: \(error)")
+    }
   }
 }
 
@@ -162,36 +208,40 @@ struct AddProductView: View {
       }
 
       Button(action: {
-        let colorList = colors.split(separator: ",").map { String($0.trimmingCharacters(in: .whitespaces)) }
-        let sizeList = sizes.split(separator: ",").map { String($0.trimmingCharacters(in: .whitespaces)) }
-
-        let newSpu = SpuEntity(context: managedObjectContext)
-        newSpu.id = UUID()
-        newSpu.name = productName
-        newSpu.price = Double(productPrice) ?? 0
-
-        for color in colorList {
-          for size in sizeList {
-            let newSku = SkuEntity(context: managedObjectContext)
-            newSku.id = UUID()
-            newSku.color = color
-            newSku.size = size
-            newSku.stock = 0
-            newSku.spu = newSpu
-          }
-        }
-
-        do {
-          try managedObjectContext.save()
-          presentationMode.wrappedValue.dismiss()
-        } catch {
-          print("Error saving new product: \(error)")
-        }
+        saveNewProduct()
       }) {
         Text("添加商品")
       }
     }
     .navigationBarTitle("添加商品", displayMode: .inline)
+  }
+
+  func saveNewProduct() {
+    let colorList = colors.split(separator: ",").map { String($0.trimmingCharacters(in: .whitespaces)) }
+    let sizeList = sizes.split(separator: ",").map { String($0.trimmingCharacters(in: .whitespaces)) }
+
+    let newSpu = SpuEntity(context: managedObjectContext)
+    newSpu.id = UUID()
+    newSpu.name = productName
+    newSpu.price = Double(productPrice) ?? 0
+
+    for color in colorList {
+      for size in sizeList {
+        let newSku = SkuEntity(context: managedObjectContext)
+        newSku.id = UUID()
+        newSku.color = color
+        newSku.size = size
+        newSku.stock = 0
+        newSku.spu = newSpu
+      }
+    }
+
+    do {
+      try managedObjectContext.save()
+      presentationMode.wrappedValue.dismiss()
+    } catch {
+      print("Error saving new product: \(error)")
+    }
   }
 }
 

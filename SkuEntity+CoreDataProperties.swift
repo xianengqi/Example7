@@ -22,11 +22,11 @@ public extension SkuEntity {
 
   @NSManaged var spu: SpuEntity
 
-  override func awakeFromInsert() {
-    super.awakeFromInsert()
-    id = UUID()
-    sortIndex = Int16(Date().timeIntervalSince1970) // 为 sortIndex 赋值
-  }
+//  override func awakeFromInsert() {
+//    super.awakeFromInsert()
+//    id = UUID()
+//    sortIndex = Int16(Date().timeIntervalSince1970) // 为 sortIndex 赋值
+//  }
 }
 
 extension SkuEntity: Identifiable {}
