@@ -86,6 +86,7 @@ struct ProductDetailView: View {
 
         VStack {
           Text("库存信息")
+
           StockDetailsView(spu: spu)
         }
       }
@@ -100,7 +101,12 @@ struct StockDetailsView: View {
   @ObservedObject var spu: SpuEntity
 
   @State private var selectedColor: String?
-  @State private var selectedSku: SkuEntity?
+//  @State private var selectedSku: SkuEntity?
+  private var selectedSku: SkuEntity? {
+    spu.skus.first { $0.color == selectedColor }
+  }
+
+  @State private var isShowingInOutHistoryView = false
 
   @Environment(\.managedObjectContext) private var managedObjectContext
 
@@ -109,13 +115,28 @@ struct StockDetailsView: View {
   init(spu: SpuEntity) {
     self.spu = spu
     self._selectedColor = State(initialValue: Array(Set(spu.skus.map { $0.color })).sorted().first)
-    self._selectedSku = State(initialValue: spu.skus.filter { $0.color == self.selectedColor }.first)
+//    self._selectedSku = State(initialValue: spu.skus.filter { $0.color == self.selectedColor }.first)
   }
 
   var body: some View {
     VStack {
       Text("选择颜色")
         .font(.headline)
+      Text("总库存：\(spu.totalStock)")
+
+      // 在 VStack 中添加历史记录按钮
+      Button(action: {
+        isShowingInOutHistoryView = true
+      }) {
+        Text("查看入库/出库历史记录")
+          .font(.headline)
+      }
+      .padding(.top)
+      .sheet(isPresented: $isShowingInOutHistoryView) {
+        if let selectedSku = selectedSku {
+          InOutHistoryView(sku: selectedSku)
+        }
+      }
 
       ScrollView(.horizontal, showsIndicators: false) {
         HStack {
@@ -145,6 +166,7 @@ struct StockDetailsView: View {
 
               Button(action: {
                 sku.stock += 1
+                addInStockHistory(to: sku) // Add this line
                 updateView.toggle() // Add this line
                 try? managedObjectContext.save()
               }) {
@@ -155,6 +177,7 @@ struct StockDetailsView: View {
 
               Button(action: {
                 sku.stock = max(0, sku.stock - 1)
+                addOutStockHistory(to: sku) // Add this line
                 updateView.toggle() // Add this line
                 try? managedObjectContext.save()
               }) {
@@ -165,6 +188,13 @@ struct StockDetailsView: View {
             }
           }
         }
+        HStack {
+          let colorStocks = Dictionary(grouping: spu.skus, by: { $0.color }).mapValues { $0.reduce(0) { $0 + $1.stock } }
+          let selectedColorStock = colorStocks[selectedColor] ?? 0
+
+          Text("\(selectedColor) 库存：\(selectedColorStock)")
+            .padding(.top)
+        }
       }
     }
     .onReceive(Just(updateView)) { _ in
@@ -173,12 +203,24 @@ struct StockDetailsView: View {
     .padding(.horizontal)
     .navigationBarTitle("库存详情", displayMode: .inline)
   }
+
+  private func addInStockHistory(to sku: SkuEntity) {
+    let inStockHistory = InStockHistory(context: managedObjectContext)
+    inStockHistory.timestamp = Date()
+    inStockHistory.quantity = 1
+    sku.addToInStockHistories(inStockHistory)
+  }
+
+  private func addOutStockHistory(to sku: SkuEntity) {
+    let outStockHistory = OutStockHistory(context: managedObjectContext)
+    outStockHistory.timestamp = Date()
+    outStockHistory.quantity = 1
+    sku.addToOutStockHistories(outStockHistory)
+  }
 }
 
 // 添加商品页面
 import SwiftUI
-
-
 
 struct Example2: View {
   var body: some View {
