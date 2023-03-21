@@ -102,9 +102,13 @@ struct StockDetailsView: View {
 
   @State private var selectedColor: String?
 //  @State private var selectedSku: SkuEntity?
-  private var selectedSku: SkuEntity? {
-    spu.skus.first { $0.color == selectedColor }
+//  private var selectedSku: SkuEntity? {
+//    spu.skus.first { $0.color == selectedColor }
+//  }
+  private var selectedSkus: [SkuEntity] {
+    spu.skus.filter { $0.color == selectedColor }
   }
+
 
   @State private var isShowingInOutHistoryView = false
 
@@ -133,9 +137,9 @@ struct StockDetailsView: View {
       }
       .padding(.top)
       .sheet(isPresented: $isShowingInOutHistoryView) {
-        if let selectedSku = selectedSku {
-          InOutHistoryView(sku: selectedSku)
-        }
+        
+          InOutHistoryView(skus: selectedSkus)
+        
       }
 
       ScrollView(.horizontal, showsIndicators: false) {
