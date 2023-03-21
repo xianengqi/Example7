@@ -158,7 +158,7 @@ struct StockDetailsView: View {
           .padding(.top)
 
         VStack {
-          ForEach(spu.skus.filter { $0.color == selectedColor }.sorted { $0.size > $1.size }) { sku in
+          ForEach(spu.skus.filter { $0.color == selectedColor  }.sorted { $0.size > $1.size }) { sku in
             HStack {
               Text("尺寸：\(sku.size)")
               Spacer()
@@ -208,14 +208,20 @@ struct StockDetailsView: View {
     let inStockHistory = InStockHistory(context: managedObjectContext)
     inStockHistory.timestamp = Date()
     inStockHistory.quantity = 1
+    inStockHistory.sku = sku // 更新这里
     sku.addToInStockHistories(inStockHistory)
+    try? managedObjectContext.save()
+   
   }
 
   private func addOutStockHistory(to sku: SkuEntity) {
     let outStockHistory = OutStockHistory(context: managedObjectContext)
     outStockHistory.timestamp = Date()
     outStockHistory.quantity = 1
+    outStockHistory.sku = sku // 更新这里
     sku.addToOutStockHistories(outStockHistory)
+    try? managedObjectContext.save()
+    
   }
 }
 
